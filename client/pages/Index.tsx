@@ -115,8 +115,6 @@ const Index = () => {
             </Button>
           </motion.div>
         </div>
-
-        {/* Ken Burns hint: The scale animation in motion.div handles this */}
       </section>
 
       {/* Module 2: Brand Story */}
