@@ -81,9 +81,9 @@ const About = () => {
                   <p className="font-semibold mb-2">ДЦ Европа</p>
                   <p className="text-muted-foreground">Красный проспект, 182/1, офис 909, 1116, 9 и 11 этаж</p>
                 </div>
-                <a 
-                  href="https://go.2gis.com/QiqGC" 
-                  target="_blank" 
+                <a
+                  href="https://go.2gis.com/lVPw3"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block mt-4 text-primary border-b border-primary/30 hover:border-primary transition-all text-sm uppercase tracking-widest font-medium"
                 >
