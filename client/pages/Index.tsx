@@ -102,14 +102,13 @@ const Index = () => {
           >
             <Button
               asChild
-              className="bg-white text-black hover:bg-white/90 rounded-full px-10 py-7 text-sm uppercase tracking-widest"
+              className="bg-white text-black hover:bg-white/90 rounded-full px-10 py-7 text-sm uppercase tracking-widest transition-all"
             >
               <Link to="/booking">Записаться на тренировку</Link>
             </Button>
             <Button
               asChild
-              variant="outline"
-              className="border-white text-white hover:bg-white/10 rounded-full px-10 py-7 text-sm uppercase tracking-widest"
+              className="bg-transparent border border-white text-white hover:bg-white/10 rounded-full px-10 py-7 text-sm uppercase tracking-widest transition-all"
             >
               <Link to="/services">Посмотреть услуги</Link>
             </Button>
