@@ -125,14 +125,19 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-8 font-semibold">Наша философия</h2>
+            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-8 font-semibold">
+              Наша философия
+            </h2>
             <p className="text-2xl md:text-4xl font-serif leading-relaxed text-foreground/90">
-              Pilates Princess — это премиальное пространство для женщин, где тренировки становятся эстетическим ритуалом.
+              Pilates Princess — это премиальное пространство для женщин, где
+              тренировки становятся эстетическим ритуалом.
             </p>
             <div className="h-px w-24 bg-primary/30 mx-auto my-12" />
             <p className="text-lg text-muted-foreground leading-loose">
-              Мы помогаем создать сильное, гибкое и здоровое тело в атмосфере заботы, комфорта и красоты.
-              Каждая программа строится индивидуально, с учетом целей, уровня подготовки и особенностей тела.
+              Мы помогаем создать сильное, гибкое и здоровое тело в атмосфере
+              заботы, комфорта и красоты. Каждая программа строится
+              индивидуально, с учетом целей, уровня подготовки и особенностей
+              тела.
             </p>
           </motion.div>
         </div>
@@ -141,7 +146,9 @@ const Index = () => {
       {/* Module 3: Premium Benefits */}
       <section className="py-24 px-6 md:px-12 bg-card">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-serif text-center mb-20">Преимущества студии</h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-center mb-20">
+            Преимущества студии
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -173,7 +180,9 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-4xl md:text-6xl font-serif mb-12">Ваш результат</h2>
+            <h2 className="text-4xl md:text-6xl font-serif mb-12">
+              Ваш результат
+            </h2>
             <ul className="space-y-8">
               {[
                 "Красивая осанка",
@@ -184,7 +193,9 @@ const Index = () => {
               ].map((item, i) => (
                 <li key={i} className="flex items-center space-x-6">
                   <span className="w-12 h-px bg-primary" />
-                  <span className="text-xl md:text-2xl font-light text-foreground/80">{item}</span>
+                  <span className="text-xl md:text-2xl font-light text-foreground/80">
+                    {item}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -202,7 +213,9 @@ const Index = () => {
               className="rounded-3xl shadow-2xl"
             />
             <div className="absolute -bottom-10 -left-10 bg-primary/10 backdrop-blur-xl p-12 rounded-3xl hidden md:block border border-white/20">
-              <p className="text-primary font-serif italic text-2xl">«Тело, в котором комфортно жить»</p>
+              <p className="text-primary font-serif italic text-2xl">
+                «Тело, в котором комфортно жить»
+              </p>
             </div>
           </motion.div>
         </div>
@@ -217,14 +230,18 @@ const Index = () => {
             ))}
           </div>
           <h2 className="text-3xl font-serif mb-4">⭐ 5.0 / 53 отзыва</h2>
-          <p className="text-muted-foreground uppercase tracking-widest text-sm mb-16">Наши клиенты о нас</p>
-          
+          <p className="text-muted-foreground uppercase tracking-widest text-sm mb-16">
+            Наши клиенты о нас
+          </p>
+
           <div className="relative overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex-[0_0_100%] min-w-0 px-4">
                   <div className="bg-background p-12 rounded-3xl italic text-lg leading-relaxed text-foreground/70">
-                    "Это лучшее место для пилатеса в городе. Атмосфера просто невероятная, а внимание тренера позволяет чувствовать себя в полной безопасности и прогрессировать с каждым занятием."
+                    "Это лучшее место для пилатеса в городе. Атмосфера просто
+                    невероятная, а внимание тренера позволяет чувствовать себя в
+                    полной безопасности и прогрессировать с каждым занятием."
                   </div>
                 </div>
               ))}

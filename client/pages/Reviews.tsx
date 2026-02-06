@@ -43,11 +43,19 @@ const Reviews = () => {
             <div className="flex flex-col items-center gap-4">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-primary fill-primary" size={24} />
+                  <Star
+                    key={i}
+                    className="text-primary fill-primary"
+                    size={24}
+                  />
                 ))}
               </div>
-              <p className="text-xl font-medium text-foreground">5.0 на основе 53 отзывов</p>
-              <p className="text-muted-foreground uppercase tracking-widest text-sm">Мы ценим ваше доверие</p>
+              <p className="text-xl font-medium text-foreground">
+                5.0 на основе 53 отзывов
+              </p>
+              <p className="text-muted-foreground uppercase tracking-widest text-sm">
+                Мы ценим ваше доверие
+              </p>
             </div>
           </motion.div>
 
@@ -61,11 +69,18 @@ const Reviews = () => {
                 transition={{ delay: idx * 0.1 }}
                 className="bg-card p-10 rounded-3xl border border-border/20 relative overflow-hidden"
               >
-                <Quote className="absolute top-8 right-8 text-primary/10" size={120} />
+                <Quote
+                  className="absolute top-8 right-8 text-primary/10"
+                  size={120}
+                />
                 <div className="relative z-10">
                   <div className="flex gap-1 mb-6">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} className="text-primary fill-primary" size={16} />
+                      <Star
+                        key={i}
+                        className="text-primary fill-primary"
+                        size={16}
+                      />
                     ))}
                   </div>
                   <p className="text-lg text-foreground/80 leading-relaxed mb-8 italic">
@@ -73,7 +88,9 @@ const Reviews = () => {
                   </p>
                   <div className="flex items-center justify-between mt-auto">
                     <span className="font-serif text-xl">{review.name}</span>
-                    <span className="text-sm text-muted-foreground">{review.date}</span>
+                    <span className="text-sm text-muted-foreground">
+                      {review.date}
+                    </span>
                   </div>
                 </div>
               </motion.div>
@@ -86,7 +103,9 @@ const Reviews = () => {
             viewport={{ once: true }}
             className="mt-20 text-center"
           >
-            <p className="text-muted-foreground mb-8">Оставьте свой отзыв о нашей работе</p>
+            <p className="text-muted-foreground mb-8">
+              Оставьте свой отзыв о нашей работе
+            </p>
             <button className="bg-primary text-primary-foreground px-10 py-4 rounded-full uppercase tracking-widest text-xs hover:brightness-110 transition-all shadow-lg">
               Написать отзыв
             </button>

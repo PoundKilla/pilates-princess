@@ -31,7 +31,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500 py-4 px-6 md:px-12 flex items-center justify-between",
           isScrolled || isMenuOpen
             ? "bg-background/80 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
+            : "bg-transparent",
         )}
       >
         <Link
@@ -49,7 +49,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
               to={link.href}
               className={cn(
                 "text-sm uppercase tracking-widest hover:text-primary transition-colors",
-                location.pathname === link.href ? "text-primary font-medium" : "text-foreground/80"
+                location.pathname === link.href
+                  ? "text-primary font-medium"
+                  : "text-foreground/80",
               )}
             >
               {link.label}
@@ -81,7 +83,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 onClick={() => setIsMenuOpen(false)}
                 className={cn(
                   "text-lg uppercase tracking-widest",
-                  location.pathname === link.href ? "text-primary" : "text-foreground/80"
+                  location.pathname === link.href
+                    ? "text-primary"
+                    : "text-foreground/80",
                 )}
               >
                 {link.label}
@@ -96,13 +100,18 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       <footer className="bg-card border-t border-border/50 py-16 px-6 md:px-12">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-2">
-            <h2 className="text-2xl font-serif tracking-widest uppercase mb-6">Pilates Princess</h2>
+            <h2 className="text-2xl font-serif tracking-widest uppercase mb-6">
+              Pilates Princess
+            </h2>
             <p className="text-muted-foreground max-w-md leading-relaxed">
-              Премиальное пространство для женщин в Новосибирске. Искусство движения, сила и грация в каждой тренировке.
+              Премиальное пространство для женщин в Новосибирске. Искусство
+              движения, сила и грация в каждой тренировке.
             </p>
           </div>
           <div>
-            <h3 className="text-sm uppercase tracking-widest mb-6 font-semibold">Навигация</h3>
+            <h3 className="text-sm uppercase tracking-widest mb-6 font-semibold">
+              Навигация
+            </h3>
             <ul className="space-y-4">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -117,7 +126,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             </ul>
           </div>
           <div>
-            <h3 className="text-sm uppercase tracking-widest mb-6 font-semibold">Контакты</h3>
+            <h3 className="text-sm uppercase tracking-widest mb-6 font-semibold">
+              Контакты
+            </h3>
             <div className="space-y-4 text-muted-foreground">
               <p>+7-923-135-17-11</p>
               <p>Новосибирск, ТЦ Европа, Красный проспект, 182</p>
