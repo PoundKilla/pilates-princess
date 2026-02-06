@@ -193,13 +193,17 @@ const Booking = () => {
                   Если у вас остались вопросы, напишите нам в мессенджеры — мы ответим в течение 15 минут.
                 </p>
                 <div className="space-y-4">
-                  <Button variant="outline" className="w-full rounded-xl py-6 border-primary/20 text-primary hover:bg-primary/10 justify-start gap-4">
-                    <MessageCircle size={20} />
-                    WhatsApp
+                  <Button asChild variant="outline" className="w-full rounded-xl py-6 border-primary/20 text-primary hover:bg-primary/10 justify-start gap-4">
+                    <a href="https://wa.me/79231351711" target="_blank" rel="noopener noreferrer">
+                      <MessageCircle size={20} />
+                      WhatsApp
+                    </a>
                   </Button>
-                  <Button variant="outline" className="w-full rounded-xl py-6 border-primary/20 text-primary hover:bg-primary/10 justify-start gap-4">
-                    <Send size={20} />
-                    Telegram
+                  <Button asChild variant="outline" className="w-full rounded-xl py-6 border-primary/20 text-primary hover:bg-primary/10 justify-start gap-4">
+                    <a href="https://t.me/+79231351711" target="_blank" rel="noopener noreferrer">
+                      <Send size={20} />
+                      Telegram
+                    </a>
                   </Button>
                 </div>
               </div>
