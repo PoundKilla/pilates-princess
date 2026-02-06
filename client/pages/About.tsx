@@ -126,6 +126,28 @@ const About = () => {
               <p className="text-sm text-muted-foreground mt-2">Для наших клиентов</p>
             </motion.div>
           </div>
+
+          {/* Map Link Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-20 relative rounded-3xl overflow-hidden h-[400px] group cursor-pointer"
+          >
+            <a href="https://go.2gis.com/lVPw3" target="_blank" rel="noopener noreferrer">
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-all duration-500 z-10" />
+              <img
+                src="https://images.pexels.com/photos/18499504/pexels-photo-18499504.png"
+                alt="View on Map"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white">
+                <MapPin size={48} className="mb-4" />
+                <h3 className="text-2xl font-serif uppercase tracking-widest">Посмотреть на карте</h3>
+                <p className="mt-2 text-white/80 uppercase tracking-widest text-xs">Открыть 2ГИС</p>
+              </div>
+            </a>
+          </motion.div>
         </div>
       </div>
     </Layout>
