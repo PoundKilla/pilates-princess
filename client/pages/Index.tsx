@@ -76,16 +76,21 @@ const Index = () => {
   return (
     <Layout>
       {/* Module 1: Hero Slideshow */}
-      <section className="relative h-[70vh] sm:h-[80vh] md:h-screen w-full overflow-hidden">
-        <div className="absolute inset-0 z-0 h-full w-full" ref={heroRef}>
+      <section className="relative min-h-[500px] h-[80dvh] md:h-screen w-full overflow-hidden bg-card">
+        <div className="absolute inset-0 z-0 h-full w-full touch-pan-y" ref={heroRef}>
           <div className="flex h-full w-full">
             {heroImages.map((img, index) => (
-              <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full w-full">
+              <div
+                key={index}
+                className="flex-[0_0_100%] min-w-0 relative h-full w-full select-none"
+              >
                 <div className="absolute inset-0 bg-black/40 z-10" />
                 <img
                   src={img}
                   alt={`Slide ${index + 1}`}
                   className="w-full h-full object-cover"
+                  loading={index === 0 ? "eager" : "lazy"}
+                  draggable="false"
                 />
               </div>
             ))}
