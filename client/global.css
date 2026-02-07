@@ -116,4 +116,10 @@
     overflow-x: auto;
     white-space: pre;
   }
+
+  /* Embla Fade Plugin Stability */
+  .embla__slide {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
 }
