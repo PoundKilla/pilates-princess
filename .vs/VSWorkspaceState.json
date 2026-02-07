@@ -1,6 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\.builder",
+    "\\.builder\\rules",
+    "\\client",
+    "\\client\\components",
+    "\\client\\hooks",
+    "\\client\\lib",
+    "\\client\\pages",
+    "\\shared"
   ],
+  "SelectedNode": "\\client\\App.tsx",
   "PreviewInSolutionExplorer": false
 }
