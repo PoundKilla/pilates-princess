@@ -5,7 +5,7 @@ import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/pilates-princess/", // ✅ ВАЖНО для GitHub Pages
+  base: "/pilates-princess/", // 
 
   server: {
     host: "::",
