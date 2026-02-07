@@ -44,10 +44,16 @@ const benefits = [
 ];
 
 const Index = () => {
-  const [heroRef, heroApi] = useEmblaCarousel({ loop: true, duration: 30 }, [
-    Autoplay({ delay: 5000, stopOnInteraction: false }),
-    Fade(),
-  ]);
+  const [heroRef, heroApi] = useEmblaCarousel(
+    {
+      loop: true,
+      duration: 30,
+      skipSnaps: false,
+      dragFree: false,
+      containScroll: "trimSnaps",
+    },
+    [Autoplay({ delay: 5000, stopOnInteraction: false }), Fade()],
+  );
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
