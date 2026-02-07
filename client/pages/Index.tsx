@@ -82,13 +82,13 @@ const Index = () => {
   return (
     <Layout>
       {/* Module 1: Hero Slideshow */}
-      <section className="relative min-h-[500px] h-[80dvh] md:h-screen w-full overflow-hidden bg-card">
+      <section className="relative min-h-[500px] h-[100dvh] w-full overflow-hidden bg-card">
         <div className="absolute inset-0 z-0 h-full w-full touch-pan-y" ref={heroRef}>
-          <div className="flex h-full w-full">
+          <div className="flex h-full w-full embla__container">
             {heroImages.map((img, index) => (
               <div
                 key={index}
-                className="flex-[0_0_100%] min-w-0 relative h-full w-full select-none"
+                className="flex-[0_0_100%] min-w-0 relative h-full w-full select-none embla__slide"
               >
                 <div className="absolute inset-0 bg-black/40 z-10" />
                 <img
@@ -142,31 +142,34 @@ const Index = () => {
         </div>
 
         {/* Navigation Arrows */}
-        <div className="absolute inset-0 z-30 flex items-center justify-between px-4 md:px-10 pointer-events-none">
+        <div className="absolute inset-0 z-30 flex items-center justify-between px-2 md:px-10 pointer-events-none">
           <button
             onClick={scrollPrevHero}
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto active:scale-95"
+            aria-label="Previous slide"
           >
-            <ChevronLeft size={20} className="md:w-6 md:h-6" />
+            <ChevronLeft size={24} className="md:w-8 md:h-8" />
           </button>
           <button
             onClick={scrollNextHero}
-            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto active:scale-95"
+            aria-label="Next slide"
           >
-            <ChevronRight size={20} className="md:w-6 md:h-6" />
+            <ChevronRight size={24} className="md:w-8 md:h-8" />
           </button>
         </div>
 
         {/* Pagination Dots */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-3 pointer-events-auto">
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-4 pointer-events-auto p-2">
           {scrollSnaps.map((_, index) => (
             <button
               key={index}
               onClick={() => scrollToHero(index)}
               className={cn(
-                "w-2 h-2 rounded-full transition-all duration-300",
-                selectedIndex === index ? "bg-white w-8" : "bg-white/40 hover:bg-white/60"
+                "h-2 rounded-full transition-all duration-300",
+                selectedIndex === index ? "bg-white w-10" : "bg-white/40 w-2 hover:bg-white/60"
               )}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
