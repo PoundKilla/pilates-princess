@@ -1,16 +1,18 @@
 import { Layout } from "@/components/Layout";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import Fade from "embla-carousel-fade";
 
 const heroImages = [
   "https://images.pexels.com/photos/18499504/pexels-photo-18499504.png",
   "https://images.pexels.com/photos/25596680/pexels-photo-25596680.jpeg",
-  "https://images.pexels.com/photos/18499504/pexels-photo-18499504.png", // Reuse or find more
+  "https://images.pexels.com/photos/18499504/pexels-photo-18499504.png",
 ];
 
 const benefits = [
@@ -41,14 +43,29 @@ const benefits = [
 ];
 
 const Index = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [heroRef, heroApi] = useEmblaCarousel({ loop: true, duration: 30 }, [
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+    Fade(),
+  ]);
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onSelect = useCallback(() => {
+    if (!heroApi) return;
+    setSelectedIndex(heroApi.selectedScrollSnap());
+  }, [heroApi]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
+    if (!heroApi) return;
+    setScrollSnaps(heroApi.scrollSnapList());
+    heroApi.on("select", onSelect);
+    onSelect();
+  }, [heroApi, onSelect]);
+
+  const scrollPrevHero = useCallback(() => heroApi && heroApi.scrollPrev(), [heroApi]);
+  const scrollNextHero = useCallback(() => heroApi && heroApi.scrollNext(), [heroApi]);
+  const scrollToHero = useCallback((index: number) => heroApi && heroApi.scrollTo(index), [heroApi]);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
@@ -58,31 +75,28 @@ const Index = () => {
   return (
     <Layout>
       {/* Module 1: Hero Slideshow */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSlide}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="absolute inset-0"
-          >
-            <div className="absolute inset-0 bg-black/30 z-10" />
-            <img
-              src={heroImages[currentSlide]}
-              alt="Pilates Studio"
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </AnimatePresence>
+      <section className="relative h-[70vh] sm:h-[80vh] md:h-screen w-full overflow-hidden">
+        <div className="absolute inset-0 z-0 h-full w-full" ref={heroRef}>
+          <div className="flex h-full w-full">
+            {heroImages.map((img, index) => (
+              <div key={index} className="flex-[0_0_100%] min-w-0 relative h-full w-full">
+                <div className="absolute inset-0 bg-black/40 z-10" />
+                <img
+                  src={img}
+                  alt={`Slide ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
-        <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 text-white">
+        <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 text-white pointer-events-none">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="text-4xl md:text-7xl font-serif mb-6 leading-tight max-w-5xl"
+            className="text-4xl md:text-7xl font-serif mb-6 leading-tight max-w-5xl pointer-events-auto"
           >
             Pilates Princess — студия пилатеса на реформере в Новосибирске
           </motion.h1>
@@ -90,7 +104,7 @@ const Index = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="text-lg md:text-2xl font-light tracking-widest mb-12"
+            className="text-lg md:text-2xl font-light tracking-widest mb-12 pointer-events-auto"
           >
             Искусство движения. Сила. Грация. Гармония.
           </motion.p>
@@ -98,7 +112,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 1 }}
-            className="flex flex-col sm:flex-row gap-6"
+            className="flex flex-col sm:flex-row gap-6 pointer-events-auto"
           >
             <Button
               asChild
@@ -114,6 +128,36 @@ const Index = () => {
             </Button>
           </motion.div>
         </div>
+
+        {/* Navigation Arrows */}
+        <div className="absolute inset-0 z-30 flex items-center justify-between px-4 md:px-10 pointer-events-none">
+          <button
+            onClick={scrollPrevHero}
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto opacity-0 md:opacity-100 group-hover:opacity-100"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={scrollNextHero}
+            className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all pointer-events-auto opacity-0 md:opacity-100 group-hover:opacity-100"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+
+        {/* Pagination Dots */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-3 pointer-events-auto">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => scrollToHero(index)}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all duration-300",
+                selectedIndex === index ? "bg-white w-8" : "bg-white/40 hover:bg-white/60"
+              )}
+            />
+          ))}
+        </div>
       </section>
 
       {/* Module 2: Brand Story */}
@@ -125,19 +169,14 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-8 font-semibold">
-              Наша философия
-            </h2>
+            <h2 className="text-sm uppercase tracking-[0.3em] text-primary mb-8 font-semibold">Наша философия</h2>
             <p className="text-2xl md:text-4xl font-serif leading-relaxed text-foreground/90">
-              Pilates Princess — это премиальное пространство для женщин, где
-              тренировки становятся эстетическим ритуалом.
+              Pilates Princess — это премиальное пространство для женщин, где тренировки становятся эстетическим ритуалом.
             </p>
             <div className="h-px w-24 bg-primary/30 mx-auto my-12" />
             <p className="text-lg text-muted-foreground leading-loose">
-              Мы помогаем создать сильное, гибкое и здоровое тело в атмосфере
-              заботы, комфорта и красоты. Каждая программа строится
-              индивидуально, с учетом целей, уровня подготовки и особенностей
-              тела.
+              Мы помогаем создать сильное, гибкое и здоровое тело в атмосфере заботы, комфорта и красоты.
+              Каждая программа строится индивидуально, с учетом целей, уровня подготовки и особенностей тела.
             </p>
           </motion.div>
         </div>
@@ -146,9 +185,7 @@ const Index = () => {
       {/* Module 3: Premium Benefits */}
       <section className="py-24 px-6 md:px-12 bg-card">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-serif text-center mb-20">
-            Преимущества студии
-          </h2>
+          <h2 className="text-3xl md:text-5xl font-serif text-center mb-20">Преимущества студии</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => (
               <motion.div
@@ -180,9 +217,7 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 1 }}
           >
-            <h2 className="text-4xl md:text-6xl font-serif mb-12">
-              Ваш результат
-            </h2>
+            <h2 className="text-4xl md:text-6xl font-serif mb-12">Ваш результат</h2>
             <ul className="space-y-8">
               {[
                 "Красивая осанка",
@@ -193,9 +228,7 @@ const Index = () => {
               ].map((item, i) => (
                 <li key={i} className="flex items-center space-x-6">
                   <span className="w-12 h-px bg-primary" />
-                  <span className="text-xl md:text-2xl font-light text-foreground/80">
-                    {item}
-                  </span>
+                  <span className="text-xl md:text-2xl font-light text-foreground/80">{item}</span>
                 </li>
               ))}
             </ul>
@@ -213,9 +246,7 @@ const Index = () => {
               className="rounded-3xl shadow-2xl"
             />
             <div className="absolute -bottom-10 -left-10 bg-primary/10 backdrop-blur-xl p-12 rounded-3xl hidden md:block border border-white/20">
-              <p className="text-primary font-serif italic text-2xl">
-                «Тело, в котором комфортно жить»
-              </p>
+              <p className="text-primary font-serif italic text-2xl">«Тело, в котором комфортно жить»</p>
             </div>
           </motion.div>
         </div>
@@ -230,18 +261,14 @@ const Index = () => {
             ))}
           </div>
           <h2 className="text-3xl font-serif mb-4">⭐ 5.0 / 53 отзыва</h2>
-          <p className="text-muted-foreground uppercase tracking-widest text-sm mb-16">
-            Наши клиенты о нас
-          </p>
-
+          <p className="text-muted-foreground uppercase tracking-widest text-sm mb-16">Наши клиенты о нас</p>
+          
           <div className="relative overflow-hidden" ref={emblaRef}>
             <div className="flex">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="flex-[0_0_100%] min-w-0 px-4">
                   <div className="bg-background p-12 rounded-3xl italic text-lg leading-relaxed text-foreground/70">
-                    "Это лучшее место для пилатеса в городе. Атмосфера просто
-                    невероятная, а внимание тренера позволяет чувствовать себя в
-                    полной безопасности и прогрессировать с каждым занятием."
+                    "Это лучшее место для пилатеса в городе. Атмосфера просто невероятная, а внимание тренера позволяет чувствовать себя в полной безопасности и прогрессировать с каждым занятием."
                   </div>
                 </div>
               ))}
