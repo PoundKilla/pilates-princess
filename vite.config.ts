@@ -5,7 +5,7 @@ import { createServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/pilates-princess/", // 
+  base: "/pilates-princess/", 
 
   server: {
     host: "::",
@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
   },
 
   build: {
-    outDir: "dist/spa",
+    outDir: "dist",      
     emptyOutDir: true,
   },
 
@@ -34,7 +34,7 @@ export default defineConfig(({ mode }) => ({
 function expressPlugin(): Plugin {
   return {
     name: "express-plugin",
-    apply: "serve",
+    apply: "serve", 
     configureServer(server) {
       const app = createServer();
       server.middlewares.use(app);
